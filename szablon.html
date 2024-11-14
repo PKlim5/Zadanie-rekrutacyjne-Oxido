@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@200;300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Szablon Podglądu Artykułu</title>
+    <style>
+        body {
+            font-family: 'Exo';
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        h1, h2 {
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        h2{
+            margin-top: 5%;
+        }
+
+        h1:hover, h2:hover {
+            color: #007BFF;
+        }
+
+        p {
+            font-size: 20px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        p:hover {
+            color: #555;
+        }
+
+        img {
+            width: 40%;
+            height: auto;     
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        figcaption {
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        body, h1, h2, p, img, figcaption {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            color: #fff;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #ff0000;
+        }
+
+        .modal img {
+            transition: none;
+        }
+    </style>
+</head>
+
+<body>
+    
+
+    <!--Miejsce na kod z artykul.html-->
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const showImageModal = (src, alt) => {
+                const modal = document.createElement("div");
+                modal.classList.add("modal");
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <img src="${src}" alt="${alt}" class="modal-image">
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                const closeBtn = modal.querySelector(".close-btn");
+                closeBtn.addEventListener("click", () => {
+                    modal.remove();
+                });
+
+                modal.addEventListener("click", (e) => {
+                    if (e.target === modal) {
+                        modal.remove();
+                    }
+                });
+            };
+
+            const images = document.querySelectorAll("img");
+            images.forEach((img) => {
+                img.addEventListener("click", () => {
+                    showImageModal(img.src, img.alt);
+                });
+            });
+        });
+    </script>  
+</body>
+</html>
